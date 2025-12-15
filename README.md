@@ -38,12 +38,9 @@ CheckList (source codes must include these items; they and their results are nee
 
 ```
 ComputerSystemData/
-├─ .idea/
 ├─ java/
 │  └─ Main.java
 ├─ python/
-│  ├─ .idea/
-│  ├─ .venv/
 │  ├─ data/
 │  │  └─ data.csv
 │  ├─ data_loader.py
