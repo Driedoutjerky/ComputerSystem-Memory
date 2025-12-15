@@ -52,7 +52,6 @@ public class L3Cache {
 	
 	/* lines 내에서 0 방향 way 부터 탐색하고, 이후 1 방향 way 탐색. 
 	 * 그런데 way 가 둘 다 비어있는 경우, 하나만 비어있는 경우, 아무것도 안 비어있는 경우로 나뉨.
-	 * 1. 이미 set 내에 동일한 line이 존재하는 경우: insert 작업 안하고 기존에 있던 line 가져다 씀. 안 그러면 같은 set 내에 똑같은 line이 들어가서 이후 insert 나 read 할 떄 1 방향 절대로 못 쓰는 상태가 됨.   
 	 * 2. 비어있는 way 가 있을 경우: 한 방향이라도 line 이 존재하게 되었으니 setTrueValid() 하고 말그대로 그냥 넣음. (Credits to @MelonChicken)  
 	 * 3. 두 쪽 다 만석인 경우 -> toBeKilled 죽이고 새로 들어오는 line 으로 대체. 
 	 */
@@ -60,7 +59,8 @@ public class L3Cache {
 		int index = address % this.capacity;
 		int tag = address / this.capacity;
 		
-		// 1. 이미 set 내에 동일한 line 존재하는 경우
+		// 1. 이미 set 내에 동일한 line 존재하는 경우 -> 안 쓰게 됨
+		/*
 		for (int i = 0; i < ways; i++) {
 			CacheLine line = lines[capacity][i];
 			if (line.isValid() && line.getTag() == tag) {
@@ -69,6 +69,7 @@ public class L3Cache {
 				return;
 			}
 		}
+		*/
 		
 		// 2. 비어있는 way가 하나라도 존재하는 경우 (way 다 비어있으면 0방향 부터 채움) 
 		for (int i = 0; i < ways; i++) {
